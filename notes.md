@@ -22,3 +22,4 @@
 - pro tip: redux DevTools!!! need to put a line of code in to work
 - using VSC: debug back-end w/ VSC debugger
 - Fork: GUI for git!
+- use <Fragment> rather than <div> as a wrapper before rendering! import {Fragment} from 'react

@@ -1,28 +1,44 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
+import { pickingStudent } from './actions';
+import store from './store';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <Fragment>
+        <header>
+          <h1>Hot Seat!</h1>
         </header>
-      </div>
+        <div id='board'>
+          <h2>Today's person is...</h2>
+          <h2 id='today'>{this.props.currentStudent}</h2>
+          <button onClick={() => this.props.pickingStudents(this.props.cold)}>
+            Start
+          </button>
+        </div>
+      </Fragment>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    cold: state.cold,
+    currentStudent: state.currentStudent
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    pickingStudents: students => {
+      dispatch(pickingStudent(students));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
